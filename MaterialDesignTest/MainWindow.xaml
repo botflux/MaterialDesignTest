@@ -14,7 +14,11 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow" MinHeight="432" MinWidth="768">
+
+    
+    
     <DockPanel>
+       
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Fichier">
                 <MenuItem Header="Nouveau">
@@ -37,8 +41,13 @@
                         <materialDesign:PackIcon Kind="ContentSaveOutline" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <Separator />
                 <MenuItem Header="Fermer">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="Close" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Fermer l'application">
                     <MenuItem.Icon>
                         <materialDesign:PackIcon Kind="Close" />
                     </MenuItem.Icon>
@@ -56,6 +65,18 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Affichage">
+                <MenuItem Header="Afficher panneau de gauche" x:Name="btn_showLeftPanel" Click="btn_showLeftPanel_Click">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="PageLayoutSidebarLeft" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Cacher panneau de gauche" x:Name="btn_hideLeftPanel">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="PageLayoutSidebarLeft" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Aide">
                 <MenuItem Header="A propos">
                     <MenuItem.Icon>
@@ -66,13 +87,13 @@
         </Menu>
 
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <!-- Onglet de changement de couleur -->
+            <Grid Visibility="Hidden" x:Name="grid_changeColor" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Onglet de changement de couleur" FontSize="19" />
+            </Grid>
 
-
-            <Grid Grid.Column="1" Visibility="Visible" x:Name="grid_welcome" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!-- Onglet de bienvenue -->
+            <Grid Visibility="Visible" x:Name="grid_welcome" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Menu>
                     <Menu.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -90,7 +111,7 @@
                             <materialDesign:PackIcon Kind="FileFind" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Gérer couleur">
+                    <MenuItem Header="Gérer couleur" Command="{Binding ColorMenu}" CommandParameter="{Binding}">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="Pencil" />
                         </MenuItem.Icon>
@@ -103,9 +124,6 @@
                 </Menu>
             </Grid>
         </Grid>
-        
-        
-        
-        
+
     </DockPanel>
 </Window>

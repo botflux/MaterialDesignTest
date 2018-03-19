@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,6 +24,26 @@ namespace MaterialDesignTest
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+        private ICommand colorMenu = new RelayCommand<MainWindow>((window) =>
+        {
+            window.grid_welcome.Visibility = Visibility.Hidden;
+            window.grid_changeColor.Visibility = Visibility.Visible;
+        });
+
+        public ICommand ColorMenu
+        {
+            get
+            {
+                return colorMenu;
+            }
+        }
+
+        private void btn_showLeftPanel_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard sb = this.FindResource("CloseMenu") as Storyboard; 
+            sb.Begin();
         }
     }
 }
